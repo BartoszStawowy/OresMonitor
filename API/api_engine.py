@@ -4,7 +4,7 @@ import requests
 import os
 
 
-class ApiGateURLs(MongoDBOwnPile):
+class ApiURLInitializer(MongoDBOwnPile):
     METALS_LIST = ['XAG', 'XAU']
 
     def __init__(self):
@@ -14,8 +14,13 @@ class ApiGateURLs(MongoDBOwnPile):
         self.QUANTITY = self.list_of_ore_weight()
         self.TOKEN = os.getenv('TOKEN')
 
+
+class ApiConverters:
+
+    def __init__(self):
+        self.api_gate = ApiURLInitializer()
     def convert_url(self):
-        url = f'{self.BASIC_URL}{self.CONVERT_URL}'
+        url = f'{self.api_gate.BASIC_URL}{self.api_gate.CONVERT_URL}'
         return url
 
     def convert_request(self):
@@ -23,9 +28,9 @@ class ApiGateURLs(MongoDBOwnPile):
         headers = {
             'Content-type': 'application/json'
         }
-        for (q, m) in zip(self.QUANTITY, self.METALS_LIST):
+        for (q, m) in zip(self.api_gate.QUANTITY, self.api_gate.METALS_LIST):
             payload = {
-                'api_key': self.TOKEN,
+                'api_key': self.api_gate.TOKEN,
                 'from': m,
                 'to': 'PLN',
                 'amount': q
@@ -35,4 +40,4 @@ class ApiGateURLs(MongoDBOwnPile):
         return treasure_chest
 
 
-write_down_to_txt(ApiGateURLs().convert_request())
+write_down_to_txt(ApiConverters().convert_request())

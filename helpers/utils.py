@@ -1,6 +1,5 @@
 from guideposts.guidepost import result_path
 import datetime
-import re
 
 
 def todays_date():
