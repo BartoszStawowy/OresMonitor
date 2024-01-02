@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
-from guideposts import guidepost
-from helpers.utils import encode, eliminate_redundant_words, translate_sentence
+from Guideposts import guidepost
+from Helpers.utils import encode, eliminate_redundant_words, translate_sentence
 from DB.pile import MongoDBMintsScrapper
 import requests
 

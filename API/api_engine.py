@@ -1,8 +1,7 @@
-from helpers.utils import write_down_to_txt
+from Helpers.utils import write_down_to_txt
 from DB.pile import MongoDBOwnPile
 import requests
 import os
-
 
 class ApiURLInitializer(MongoDBOwnPile):
     METALS_LIST = ['XAG', 'XAU']
@@ -14,11 +13,11 @@ class ApiURLInitializer(MongoDBOwnPile):
         self.QUANTITY = self.list_of_ore_weight()
         self.TOKEN = os.getenv('TOKEN')
 
-
 class ApiConverters:
 
     def __init__(self):
         self.api_gate = ApiURLInitializer()
+
     def convert_url(self):
         url = f'{self.api_gate.BASIC_URL}{self.api_gate.CONVERT_URL}'
         return url
@@ -37,7 +36,8 @@ class ApiConverters:
             }
             response = requests.get(self.convert_url(), headers=headers, params=payload).json()
             treasure_chest.append(m + " {:,.2f}".format(response['result']) + " PLN")
+        self.api_gate.mongo_connection.mongo_killer()
         return treasure_chest
 
 
-write_down_to_txt(ApiConverters().convert_request())
+# write_down_to_txt(ApiConverters().convert_request())

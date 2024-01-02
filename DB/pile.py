@@ -1,11 +1,10 @@
 from pymongo import MongoClient
 from dotenv import load_dotenv, find_dotenv
 from datetime import datetime
-from helpers.utils import todays_date
-from helpers.re_matches import match_engine
+from Helpers.utils import todays_date
+from Helpers.re_matches import match_engine
 import pymongo
 import os
-
 
 class MongoDBInitializer:
 
@@ -71,9 +70,6 @@ class MongoDBOwnPile:
     def list_of_ore_weight(self):
         return [self.count_weight_of_AUG_ore(), self.count_weight_of_AUX_ore()]
 
-
-# MongoDBConnection().add_coin_to_db('AUG', "Noah's ark", '2023', '116,86', 1, '1')
-
 class MongoDBMintsScrapper:
 
     def __init__(self):
@@ -94,5 +90,4 @@ class MongoDBMintsScrapper:
                 }
                 self.mongo_connection.MINTS_ORES.insert_one(load_ore)
         self.mongo_connection.mongo_killer()
-
 

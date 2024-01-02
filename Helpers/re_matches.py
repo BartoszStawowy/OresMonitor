@@ -1,6 +1,5 @@
 import re
 
-
 def match_engine(mint, ore):
     if mint == 'dragon_mint':
         return re.match(r'^(.*?)\s+(\d{4})?\s*-\s*([\d,]+)zł$', ore)
