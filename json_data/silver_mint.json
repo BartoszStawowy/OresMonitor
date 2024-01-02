@@ -1,0 +1,11 @@
+{
+  "mint": "silver_mint",
+  "main_url": "https://srebrnamennica.pl/",
+  "silver_suffix": "11-srebrne-monety-bulionowe?waga=1-uncja",
+  "gold_suffix": "sklep/zloto/zlote-monety-bulionowe/",
+  "coins_header": "h3",
+  "coins_header_class": "h3 product-title",
+  "coins_price": "span",
+  "coins_price_class": "price"
+  }
+

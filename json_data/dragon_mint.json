@@ -1,0 +1,11 @@
+{
+  "mint": "dragon_mint",
+  "main_url": "https://smoczamennica.pl/",
+  "silver_suffix": "sklep/srebro/srebrne-monety-bulionowe/",
+  "gold_suffix": "sklep/zloto/zlote-monety-bulionowe/",
+  "coins_header": "h2",
+  "coins_header_class": "woocommerce-loop-product__title",
+  "coins_price": "span",
+  "coins_price_class": "woocommerce-Price-amount amount"
+  }
+
