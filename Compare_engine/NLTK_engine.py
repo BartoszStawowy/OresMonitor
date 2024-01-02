@@ -18,8 +18,9 @@ class CompareOresMachine(CoinPriceScraper, MongoDBOwnPile):
         try:
             find('tokenizers/punkt')
         except LookupError:
-            nltk.download_shell()
+            nltk.download('punkt')
             os.environ["TK_SILENCE_DEPRECATION"] = "1"
+
         words = word_tokenize(text)
         stemmer = PorterStemmer()
         stemmed_words = [stemmer.stem(word) for word in words]
