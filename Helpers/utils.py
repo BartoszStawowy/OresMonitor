@@ -1,6 +1,5 @@
-from guideposts.guidepost import result_path
+from Guideposts.guidepost import result_path
 import datetime
-
 
 def todays_date():
     today_date = datetime.date.today()
@@ -37,5 +36,4 @@ def translate_sentence(sentence, target_language='pl'):
     translator = Translator()
     translated_sentence = translator.translate(sentence, dest=target_language).text
     return translated_sentence
-
 

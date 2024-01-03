@@ -3,14 +3,12 @@ from nltk.tokenize import word_tokenize
 from nltk.stem import PorterStemmer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-from helpers.utils import translate_sentence
+from Helpers.utils import translate_sentence
 import nltk
 import os
 
 from DB.pile import MongoDBOwnPile
-from scrappers.scrapers import CoinPriceScraper
-
-
+from Scrappers.scrapers import CoinPriceScraper
 
 class CompareOresMachine(CoinPriceScraper, MongoDBOwnPile):
 
@@ -46,5 +44,5 @@ class CompareOresMachine(CoinPriceScraper, MongoDBOwnPile):
         similar_sentences = [all_ores[i] for i in similar_indices]
         return similar_sentences
 
-
 CompareOresMachine().find_similar_ore()
+
