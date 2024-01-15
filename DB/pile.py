@@ -8,6 +8,7 @@ import os
 
 class MongoDBInitializer:
 
+    # Mongo_db connection. Credentials stored in .env #
     def __init__(self):
         self.CLIENT = MongoClient(os.getenv('SERVER'), int(os.getenv('PORT')))
         self.DB = self.CLIENT.Ores
@@ -75,6 +76,7 @@ class MongoDBMintsScrapper:
     def __init__(self):
         self.mongo_connection = MongoDBInitializer()
 
+    # add ore from mint with current price and date #
     def add_document(self, ores_from_mint, mint_url, mint):
 
         for ore in ores_from_mint:
