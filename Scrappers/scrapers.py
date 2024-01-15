@@ -7,6 +7,7 @@ import requests
 
 
 class CoinPriceScraper:
+    # Engine for scrappers, to add another mint, add json file with proper html anchors to json_data folder #
     mints = ['dragon_mint', 'silver_mint']
 
 
@@ -23,7 +24,7 @@ class CoinPriceScraper:
             coin_prices = [price.get_text(strip=True) for price in coins_price]
 
             coins_list = [f"{name} - {price}" for name, price in zip(coin_names, coin_prices)]
-
+            # Adding ore to MongoDB with actual price and date #
             MongoDBMintsScrapper().add_document(eliminate_redundant_words(encode(coins_list)), data_package['main_url'], data_package['mint'])
 
         else:
