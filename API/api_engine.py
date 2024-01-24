@@ -1,11 +1,11 @@
 from Helpers.utils import write_down_to_txt
-from DB.pile import MongoDBOwnPile
+from DB.pile import MongoDBOresPile
 from dataclasses import dataclass
 import requests
 import os
 
 @dataclass
-class ApiURLInitializer():
+class ApiURLInitializer:
     # Endpoint with actual ores prices #
     METALS_LIST = ['XAG', 'XAU']
     BASIC_URL: str = 'https://api.metalpriceapi.com/'
@@ -17,7 +17,7 @@ class ApiConverters:
 
     def __init__(self):
         self.api_gate = ApiURLInitializer()
-        self.mongo_db_pile = MongoDBOwnPile()
+        self.mongo_db_pile = MongoDBOresPile()
 
     def convert_url(self):
         url = f'{self.api_gate.BASIC_URL}{self.api_gate.CONVERT_URL}'
@@ -42,4 +42,4 @@ class ApiConverters:
         return treasure_chest
 
 
-# write_down_to_txt(ApiConverters().convert_request())
+write_down_to_txt(ApiConverters().convert_request())
