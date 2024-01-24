@@ -1,14 +1,20 @@
 from Guideposts.guidepost import result_path
 import datetime
+import os
 
 def todays_date():
     today_date = datetime.date.today()
     formatted_date = today_date.strftime("%d-%m-%Y")
     return formatted_date
 
-def write_down_to_txt(element_to_safe):
-    with open(result_path(), "a") as file:
-        file.write(f'{todays_date()} -> {element_to_safe} \n')
+def write_down_to_txt(element_to_save):
+    result_file_path = result_path()
+
+    if not os.path.exists(result_file_path):
+        with open(result_file_path, "w"):
+            pass
+    with open(result_file_path, "a") as file:
+        file.write(f'{todays_date()} -> {element_to_save}\n')
 
 def encode(list):
     return [list_element.replace(u'\xa0', ' ') for list_element in list]
@@ -25,7 +31,6 @@ def eliminate_redundant_words(list):
     return result
 
 def create_dict_with_name_and_price(scrapper_list):
-    price_pattern = r'\b\d{1,3}(?:,\d{3})*(?:\.\d{2})? zł\b'
     price_dict = {}
     for item in scrapper_list:
         price_dict[item.split(',', 1)[0].strip()] = item.split(',', 1)[1].strip()

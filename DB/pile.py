@@ -7,8 +7,9 @@ import pymongo
 import os
 
 class MongoDBInitializer:
+    load_dotenv(find_dotenv())
 
-    # Mongo_db connection. Credentials stored in .env #
+    # Mongo_db connection. DB data stored in .env #
     def __init__(self):
         self.CLIENT = MongoClient(os.getenv('SERVER'), int(os.getenv('PORT')))
         self.DB = self.CLIENT.Ores
@@ -18,16 +19,18 @@ class MongoDBInitializer:
         
     def mongo_killer(self):
         self.CLIENT.close()
+
+    def __del__(self):
+        self.mongo_killer()
         
-class MongoDBOwnPile:
-    load_dotenv(find_dotenv())
+class MongoDBOresPile:
 
     def __init__(self):
         self.mongo_connection = MongoDBInitializer()
 
     def add_coin_to_db(self, ore, name, year, price, quantity, weight):
         row = {
-               'name':name,
+               'name': name,
                'year': year,
                'price': price,
                'quantity': quantity,
@@ -71,6 +74,14 @@ class MongoDBOwnPile:
     def list_of_ore_weight(self):
         return [self.count_weight_of_AUG_ore(), self.count_weight_of_AUX_ore()]
 
+
+    # Collections from mints #
+    def find_all_stashed_ore_from_mints(self):
+        return [f'{one_ore["name"]}' for one_ore in self.mongo_connection.MINTS_ORES.find({})]
+
+    def __del__(self):
+        del self.mongo_connection
+
 class MongoDBMintsScrapper:
 
     def __init__(self):
@@ -84,7 +95,7 @@ class MongoDBMintsScrapper:
             if match:
                 name, year, price = match.groups()
                 load_ore = {
-                    "ore_name": name.strip(),
+                    "name": name.strip(),
                     "year": int(year.strip()) if year else datetime.now().year,
                     "price": float(price.replace(',', '.').strip()),
                     'mint': mint_url,
